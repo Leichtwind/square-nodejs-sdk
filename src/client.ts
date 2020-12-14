@@ -15,6 +15,7 @@ import { InvoicesApi } from './api/invoicesApi';
 import { LaborApi } from './api/laborApi';
 import { LocationsApi } from './api/locationsApi';
 import { LoyaltyApi } from './api/loyaltyApi';
+import { GiftCardsApi } from './api/giftCardsApi';
 import { MerchantsApi } from './api/merchantsApi';
 import { MobileAuthorizationApi } from './api/mobileAuthorizationApi';
 import { OAuthApi } from './api/oAuthApi';
@@ -72,6 +73,7 @@ export class Client implements ClientInterface {
   public readonly laborApi: LaborApi;
   public readonly locationsApi: LocationsApi;
   public readonly loyaltyApi: LoyaltyApi;
+  public readonly giftcardsApi: GiftCardsApi;
   public readonly merchantsApi: MerchantsApi;
   public readonly mobileAuthorizationApi: MobileAuthorizationApi;
   public readonly oAuthApi: OAuthApi;
@@ -123,6 +125,7 @@ export class Client implements ClientInterface {
     this.laborApi = new LaborApi(this);
     this.locationsApi = new LocationsApi(this);
     this.loyaltyApi = new LoyaltyApi(this);
+    this.giftcardsApi = new GiftCardsApi(this);
     this.merchantsApi = new MerchantsApi(this);
     this.mobileAuthorizationApi = new MobileAuthorizationApi(this);
     this.oAuthApi = new OAuthApi(this);
