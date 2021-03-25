@@ -9,7 +9,7 @@ export interface GiftCardActivityRequest {
 export const giftCardActivityRequestSchema: Schema<GiftCardActivityRequest> = object(
     {
         idempotencyKey: ['idempotency_key', string()],
-        giftcardActivity: ['giftcard_activity', lazy(() => giftCardActivitySchema)],
+        giftcardActivity: ['gift_card_activity', lazy(() => giftCardActivitySchema)],
     }
 );
 

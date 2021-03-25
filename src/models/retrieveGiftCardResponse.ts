@@ -10,6 +10,6 @@ export interface RetrieveGiftCardResponse {
 export const retrieveGiftCardResponseSchema: Schema<RetrieveGiftCardResponse> = object(
     {
         errors: ['errors', optional(array(lazy(() => errorSchema)))],
-        giftCard: ['giftcard', optional(lazy(() => giftCardSchema))],
+        giftCard: ['gift_card', optional(lazy(() => giftCardSchema))],
     }
 );

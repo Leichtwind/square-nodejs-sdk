@@ -11,7 +11,7 @@ export interface CreateGiftCardRequest {
 
 export const createGiftCardRequestSchema: Schema<CreateGiftCardRequest> = object(
     {
-        giftCard: ['giftcard', lazy(() => giftCardSchema)],
+        giftCard: ['gift_card', lazy(() => giftCardSchema)],
         locationId: ['location_id', string()],
         idempotencyKey: ['idempotency_key', string()],
     }

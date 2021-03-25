@@ -7,6 +7,6 @@ export interface ActivateGiftCardResponse {
 
 export const activateGiftCardResponseSchema: Schema<ActivateGiftCardResponse> = object(
     {
-        giftCardActivity: ['giftcard_activity', lazy(() => giftCardActivitySchema)]
+        giftCardActivity: ['gift_card_activity', lazy(() => giftCardActivitySchema)]
     }
 )

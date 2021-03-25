@@ -9,7 +9,7 @@ export interface DeactivateGiftCardRequest {
 export const deactivateGiftCardRequestSchema: Schema<DeactivateGiftCardRequest> = object(
     {
         idempotencyKey: ['idempotency_key', string()],
-        giftcardActivity: ['giftcard_activity', lazy(() => giftCardActivitySchema)],
+        giftcardActivity: ['gift_card_activity', lazy(() => giftCardActivitySchema)],
     }
 );
 

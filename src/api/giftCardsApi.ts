@@ -16,7 +16,7 @@ import { BaseApi } from './baseApi';
 
 export class GiftCardsApi extends BaseApi {
     createGiftCard(body: CreateGiftCardRequest, requestOptions?: RequestOptions): Promise<ApiResponse<CreateGiftCardResponse>> {
-        const req = this.createRequest('POST', '/v2/giftcards');
+        const req = this.createRequest('POST', '/v2/gift-cards');
         const mapped = req.prepareArgs({ body: [body, createGiftCardRequestSchema] });
         req.json(mapped.body);
         return req.callAsJson(createGiftCardResponseSchema, requestOptions);
@@ -41,26 +41,26 @@ export class GiftCardsApi extends BaseApi {
     retrieveGiftCard(id: string, requestOptions?: RequestOptions): Promise<ApiResponse<RetrieveGiftCardResponse>> {
         const req = this.createRequest('GET');
         const mapped = req.prepareArgs({ id: [id, string()] });
-        req.appendTemplatePath`/v2/giftcards/${mapped.id}`;
+        req.appendTemplatePath`/v2/gift-cards/${mapped.id}`;
         return req.callAsJson(retrieveGiftCardResponseSchema, requestOptions);
     }
 
     retrieveGiftCardFromGan(body: RetrieveGiftCardFromGanRequest, requestOptions?: RequestOptions): Promise<ApiResponse<RetrieveGiftCardFromGanResponse>> {
-        const req = this.createRequest('POST', '/v2/giftcards/from_gan');
+        const req = this.createRequest('POST', '/v2/gift-cards/from_gan');
         const mapped = req.prepareArgs({ body: [body, retrieveGiftCardFromGanRequestSchema] });
         req.json(mapped.body);
         return req.callAsJson(retrieveGiftCardFromGanResponseSchema, requestOptions);
     }
 
     retrieveGiftCardFromNonce(body: RetrieveGiftCardFromNonceRequest, requestOptions?: RequestOptions): Promise<ApiResponse<RetrieveGiftCardFromNonceResponse>> {
-        const req = this.createRequest('POST', '/v2/giftcards/from_nonce');
+        const req = this.createRequest('POST', '/v2/gift-cards/from_nonce');
         const mapped = req.prepareArgs({ body: [body, retrieveGiftCardFromNonceRequestSchema] });
         req.json(mapped.body);
         return req.callAsJson(retrieveGiftCardFromNonceResponseSchema, requestOptions);
     }
 
     listGiftCardActivities(body: ListGiftCardActivityRequest, requestOptions?: RequestOptions): Promise<ApiResponse<ListGiftCardActivityResponse>> {
-        const req = this.createRequest('GET', '/v2/giftcards/activities');
+        const req = this.createRequest('GET', '/v2/gift-cards/activities');
 
         const mapped = req.prepareArgs({
             giftCardId: [body.giftCardId, string()],
@@ -71,7 +71,7 @@ export class GiftCardsApi extends BaseApi {
             cursor: [body.cursor, optional(string())],
             sortOrder: [body.sortOrder, optional(string())],
         });
-        req.query('giftcard_id', mapped.giftCardId);
+        req.query('gift_card_id', mapped.giftCardId);
         req.query('type', mapped.type);
         req.query('location_id', mapped.locationId);
         req.query('begin_time', mapped.beginTime);
@@ -83,7 +83,7 @@ export class GiftCardsApi extends BaseApi {
     }
 
     private giftCardActivityRequest(body: GiftCardActivityRequest, requestOptions?: RequestOptions): Promise<ApiResponse<GiftCardActivityResponse>> {
-        const req = this.createRequest('POST', '/v2/giftcards/activity');
+        const req = this.createRequest('POST', '/v2/gift-cards/activity');
         const mapped = req.prepareArgs({ body: [body, giftCardActivityRequestSchema] });
         req.json(mapped.body);
         return req.callAsJson(giftCardActivityResponseSchema, requestOptions);

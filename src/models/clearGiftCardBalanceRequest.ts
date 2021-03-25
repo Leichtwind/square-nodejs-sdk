@@ -9,7 +9,7 @@ export interface ClearGiftCardBalanceRequest {
 export const clearGiftCardBalanceRequestSchema: Schema<ClearGiftCardBalanceRequest> = object(
     {
         idempotencyKey: ['idempotency_key', string()],
-        giftcardActivity: ['giftcard_activity', lazy(() => giftCardActivitySchema)],
+        giftcardActivity: ['gift_card_activity', lazy(() => giftCardActivitySchema)],
     }
 );
 

@@ -7,6 +7,6 @@ export interface ClearGiftCardBalanceResponse {
 
 export const clearGiftCardBalanceResponseSchema: Schema<ClearGiftCardBalanceResponse> = object(
     {
-        giftCardActivity: ['giftcard_activity', lazy(() => giftCardActivitySchema)]
+        giftCardActivity: ['gift_card_activity', lazy(() => giftCardActivitySchema)]
     }
 )

@@ -53,10 +53,10 @@ export const giftCardActivitySchema: Schema<GiftCardActivity> = object(
     {
         id: ['id', optional(string())],
         type: ['type', string()],
-        giftCardId: ['giftcard_id', string()],
-        giftCardGan: ['giftcard_gan', optional(string())],
+        giftCardId: ['gift_card_id', string()],
+        giftCardGan: ['gift_card_gan', optional(string())],
         locationId: ['location_id', string()],
-        giftcardBalanceMoney: ['giftcard_balance_money', optional(lazy(() => moneySchema))],
+        giftcardBalanceMoney: ['gift_card_balance_money', optional(lazy(() => moneySchema))],
         activateActivityDetails: ['activate_activity_details', optional(lazy(() => giftCardActivateActivityDetails))],
         loadActivityDetails: ['load_activity_details', optional(lazy(() => giftCardLoadActivityDetails))],
         clearBalanceActivityDetails: ['clear_balance_activity_details', optional(lazy(() => giftCardClearBalanceActivityDetails))],
