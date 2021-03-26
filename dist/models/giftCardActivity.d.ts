@@ -1,6 +1,6 @@
-import { Schema } from "../schema";
-import { GiftCardActivateActivityDetails, GiftCardAdjustIncrementActivityDetails, GiftCardBlockActivityDetails, GiftCardClearBalanceActivityDetails, GiftCardDeactivateActivityDetails, GiftCardImportActivityDetails, GiftCardLoadActivityDetails, GiftCardOtherActivityDetails, GiftCardRedeemActivityDetails, GiftCardRefundActivityDetails, GiftCardUnblockActivityDetails, GiftCardUnlinkedActivityDetails } from "./giftCardActivityDetails";
-import { Money } from "./money";
+import { Schema } from '../schema';
+import { GiftCardActivateActivityDetails, GiftCardAdjustIncrementActivityDetails, GiftCardBlockActivityDetails, GiftCardClearBalanceActivityDetails, GiftCardDeactivateActivityDetails, GiftCardImportActivityDetails, GiftCardLoadActivityDetails, GiftCardOtherActivityDetails, GiftCardRedeemActivityDetails, GiftCardRefundActivityDetails, GiftCardUnblockActivityDetails, GiftCardUnlinkedActivityDetails } from './giftCardActivityDetails';
+import { Money } from './money';
 export declare enum GiftCardActivityTypeEnum {
     ACTIVATE = "ACTIVATE",
     LOAD = "LOAD",

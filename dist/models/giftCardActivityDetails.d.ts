@@ -1,5 +1,5 @@
-import { Schema } from "../schema";
-import { Money } from "./money";
+import { Schema } from '../schema';
+import { Money } from './money';
 export interface GiftCardActivateActivityDetails {
     amountMoney?: Money;
     orderId?: string;

@@ -1,18 +1,18 @@
-import {giftCardSchema, GiftCardTypeEnum} from "./giftCard";
-import {lazy, object, Schema, string} from "../schema";
+import { giftCardSchema, GiftCardTypeEnum } from './giftCard';
+import { lazy, object, Schema, string } from '../schema';
 
 export interface CreateGiftCardRequest {
-    idempotencyKey: string;
-    locationId: string;
-    giftCard: {
-        type: GiftCardTypeEnum;
-    };
+  idempotencyKey: string;
+  locationId: string;
+  giftCard: {
+    type: GiftCardTypeEnum;
+  };
 }
 
 export const createGiftCardRequestSchema: Schema<CreateGiftCardRequest> = object(
-    {
-        giftCard: ['gift_card', lazy(() => giftCardSchema)],
-        locationId: ['location_id', string()],
-        idempotencyKey: ['idempotency_key', string()],
-    }
+  {
+    giftCard: ['gift_card', lazy(() => giftCardSchema)],
+    locationId: ['location_id', string()],
+    idempotencyKey: ['idempotency_key', string()],
+  }
 );

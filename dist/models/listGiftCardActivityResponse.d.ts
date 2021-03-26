@@ -1,5 +1,5 @@
-import { GiftCardActivity } from "./giftCardActivity";
-import { Schema } from "../schema";
+import { GiftCardActivity } from './giftCardActivity';
+import { Schema } from '../schema';
 export interface ListGiftCardActivityResponse {
     giftcardActivities: GiftCardActivity[];
 }

@@ -1,11 +1,11 @@
-import {object, Schema, string} from "../schema";
+import { object, Schema, string } from '../schema';
 
 export interface RetrieveGiftCardFromGanRequest {
-    gan: string;
+  gan: string;
 }
 
 export const retrieveGiftCardFromGanRequestSchema: Schema<RetrieveGiftCardFromGanRequest> = object(
-    {
-        gan: ['gan', string()],
-    }
+  {
+    gan: ['gan', string()],
+  }
 );

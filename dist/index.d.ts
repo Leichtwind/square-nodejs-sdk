@@ -1,6 +1,7 @@
 /// <reference path="shim/index.d.ts" />
 export * from './apiResponse';
 export * from './client';
+export * from './retryableClient';
 export * from './configuration';
 export * from './defaultConfiguration';
 export * from './fileWrapper';

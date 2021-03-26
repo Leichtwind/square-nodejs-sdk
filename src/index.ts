@@ -2,6 +2,7 @@
 
 export * from './apiResponse';
 export * from './client';
+export * from './retryableClient';
 export * from './configuration';
 export * from './defaultConfiguration';
 export * from './fileWrapper';

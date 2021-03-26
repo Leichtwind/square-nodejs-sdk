@@ -1,5 +1,5 @@
-import { Schema } from "../schema";
-import { GiftCardActivity } from "./giftCardActivity";
+import { Schema } from '../schema';
+import { GiftCardActivity } from './giftCardActivity';
 export interface ClearGiftCardBalanceRequest {
     idempotencyKey: string;
     giftcardActivity: GiftCardActivity;

@@ -1,5 +1,5 @@
-import { GiftCardTypeEnum } from "./giftCard";
-import { Schema } from "../schema";
+import { GiftCardTypeEnum } from './giftCard';
+import { Schema } from '../schema';
 export interface CreateGiftCardRequest {
     idempotencyKey: string;
     locationId: string;

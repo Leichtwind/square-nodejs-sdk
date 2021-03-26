@@ -9980,7 +9980,7 @@ var giftCardSchema = /*#__PURE__*/schema.object({
 });
 
 var createGiftCardRequestSchema = /*#__PURE__*/schema.object({
-  giftCard: ['giftcard', /*#__PURE__*/schema.lazy(function () {
+  giftCard: ['gift_card', /*#__PURE__*/schema.lazy(function () {
     return giftCardSchema;
   })],
   locationId: ['location_id', /*#__PURE__*/schema.string()],
@@ -9991,7 +9991,7 @@ var createGiftCardResponseSchema = /*#__PURE__*/schema.object({
   errors: ['errors', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.array( /*#__PURE__*/schema.lazy(function () {
     return errorSchema;
   })))],
-  giftCard: ['giftcard', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.lazy(function () {
+  giftCard: ['gift_card', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.lazy(function () {
     return giftCardSchema;
   }))]
 });
@@ -10082,10 +10082,10 @@ var giftCardOtherActivityDetails = /*#__PURE__*/schema.object({
 var giftCardActivitySchema = /*#__PURE__*/schema.object({
   id: ['id', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.string())],
   type: ['type', /*#__PURE__*/schema.string()],
-  giftCardId: ['giftcard_id', /*#__PURE__*/schema.string()],
-  giftCardGan: ['giftcard_gan', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.string())],
+  giftCardId: ['gift_card_id', /*#__PURE__*/schema.string()],
+  giftCardGan: ['gift_card_gan', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.string())],
   locationId: ['location_id', /*#__PURE__*/schema.string()],
-  giftcardBalanceMoney: ['giftcard_balance_money', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.lazy(function () {
+  giftcardBalanceMoney: ['gift_card_balance_money', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.lazy(function () {
     return moneySchema;
   }))],
   activateActivityDetails: ['activate_activity_details', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.lazy(function () {
@@ -10132,19 +10132,19 @@ var giftCardActivitySchema = /*#__PURE__*/schema.object({
 
 var giftCardActivityRequestSchema = /*#__PURE__*/schema.object({
   idempotencyKey: ['idempotency_key', /*#__PURE__*/schema.string()],
-  giftcardActivity: ['giftcard_activity', /*#__PURE__*/schema.lazy(function () {
+  giftcardActivity: ['gift_card_activity', /*#__PURE__*/schema.lazy(function () {
     return giftCardActivitySchema;
   })]
 });
 
 var giftCardActivityResponseSchema = /*#__PURE__*/schema.object({
-  giftCardActivity: ['giftcard_activity', /*#__PURE__*/schema.lazy(function () {
+  giftCardActivity: ['gift_card_activity', /*#__PURE__*/schema.lazy(function () {
     return giftCardActivitySchema;
   })]
 });
 
 var listGiftCardActivityResponseSchema = /*#__PURE__*/schema.object({
-  giftcardActivities: ['giftcard_activities', /*#__PURE__*/schema.array( /*#__PURE__*/schema.lazy(function () {
+  giftcardActivities: ['gift_card_activities', /*#__PURE__*/schema.array( /*#__PURE__*/schema.lazy(function () {
     return giftCardActivitySchema;
   }))]
 });
@@ -10166,13 +10166,13 @@ var retrieveGiftCardResponseSchema = /*#__PURE__*/schema.object({
   errors: ['errors', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.array( /*#__PURE__*/schema.lazy(function () {
     return errorSchema;
   })))],
-  giftCard: ['giftcard', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.lazy(function () {
+  giftCard: ['gift_card', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.lazy(function () {
     return giftCardSchema;
   }))]
 });
 
 function _templateObject$g() {
-  var data = _taggedTemplateLiteralLoose(["/v2/giftcards/", ""]);
+  var data = _taggedTemplateLiteralLoose(["/v2/gift-cards/", ""]);
 
   _templateObject$g = function _templateObject() {
     return data;
@@ -10190,7 +10190,7 @@ var GiftCardsApi = /*#__PURE__*/function (_BaseApi) {
   var _proto = GiftCardsApi.prototype;
 
   _proto.createGiftCard = function createGiftCard(body, requestOptions) {
-    var req = this.createRequest('POST', '/v2/gift_cards');
+    var req = this.createRequest('POST', '/v2/gift-cards');
     var mapped = req.prepareArgs({
       body: [body, createGiftCardRequestSchema]
     });
@@ -10224,7 +10224,7 @@ var GiftCardsApi = /*#__PURE__*/function (_BaseApi) {
   };
 
   _proto.retrieveGiftCardFromGan = function retrieveGiftCardFromGan(body, requestOptions) {
-    var req = this.createRequest('POST', '/v2/giftcards/from_gan');
+    var req = this.createRequest('POST', '/v2/gift-cards/from-gan');
     var mapped = req.prepareArgs({
       body: [body, retrieveGiftCardFromGanRequestSchema]
     });
@@ -10233,7 +10233,7 @@ var GiftCardsApi = /*#__PURE__*/function (_BaseApi) {
   };
 
   _proto.retrieveGiftCardFromNonce = function retrieveGiftCardFromNonce(body, requestOptions) {
-    var req = this.createRequest('POST', '/v2/giftcards/from_nonce');
+    var req = this.createRequest('POST', '/v2/gift-cards/from-nonce');
     var mapped = req.prepareArgs({
       body: [body, retrieveGiftCardFromNonceRequestSchema]
     });
@@ -10242,7 +10242,7 @@ var GiftCardsApi = /*#__PURE__*/function (_BaseApi) {
   };
 
   _proto.listGiftCardActivities = function listGiftCardActivities(body, requestOptions) {
-    var req = this.createRequest('GET', '/v2/giftcards/activities');
+    var req = this.createRequest('GET', '/v2/gift-cards/activities');
     var mapped = req.prepareArgs({
       giftCardId: [body.giftCardId, schema.string()],
       type: [body.type, schema.optional(schema.string())],
@@ -10252,7 +10252,7 @@ var GiftCardsApi = /*#__PURE__*/function (_BaseApi) {
       cursor: [body.cursor, schema.optional(schema.string())],
       sortOrder: [body.sortOrder, schema.optional(schema.string())]
     });
-    req.query('giftcard_id', mapped.giftCardId);
+    req.query('gift_card_id', mapped.giftCardId);
     req.query('type', mapped.type);
     req.query('location_id', mapped.locationId);
     req.query('begin_time', mapped.beginTime);
@@ -10263,7 +10263,7 @@ var GiftCardsApi = /*#__PURE__*/function (_BaseApi) {
   };
 
   _proto.giftCardActivityRequest = function giftCardActivityRequest(body, requestOptions) {
-    var req = this.createRequest('POST', '/v2/giftcards/activity');
+    var req = this.createRequest('POST', '/v2/gift-cards/activity');
     var mapped = req.prepareArgs({
       body: [body, giftCardActivityRequestSchema]
     });
@@ -17384,6 +17384,149 @@ function withAuthenticationByDefault(rb) {
   rb.authenticate(true);
 }
 
+var retryableErrors = ['API_ERROR', 'RATE_LIMITED', 'REQUEST_TIMEOUT', 'GATEWAY_TIMEOUT', 'SERVICE_UNAVAILABLE', 'INTERNAL_SERVER_ERROR'];
+var isApiError = function isApiError(error) {
+  return error instanceof ApiError;
+};
+var isAxiosError = function isAxiosError(error) {
+  return !!error.isAxiosError;
+};
+
+var isRetryableRequest = function isRetryableRequest(error) {
+  if (isAxiosError(error)) {
+    var response = error.response,
+        code = error.code;
+    return !response || ['ECONNREFUSED'].includes(code);
+  }
+
+  if (isApiError(error)) {
+    var isRetryableResponseCode = 429 === error.statusCode || error.statusCode >= 500 && 501 !== error.statusCode;
+    var isIdempotentRequest = ['GET', 'HEAD', 'OPTIONS', 'PUT', 'DELETE'].includes(error.request.method.toUpperCase() || '');
+    return isRetryableResponseCode && (isIdempotentRequest || retryableErrors.includes(error.errors[0].code));
+  }
+
+  return false;
+};
+
+var RetryableClient = /*#__PURE__*/function () {
+  function RetryableClient(config) {
+    if (config === void 0) {
+      config = {
+        maxRetries: 10
+      };
+    }
+
+    this.config = config;
+    this.callbacks = new Map();
+  }
+
+  var _proto = RetryableClient.prototype;
+
+  _proto.on = function on(event, callback) {
+    this.callbacks.set(event, callback);
+    return this;
+  };
+
+  _proto.from = function from(client, ignoreMethods) {
+    var _this = this;
+
+    if (ignoreMethods === void 0) {
+      ignoreMethods = [];
+    }
+
+    var handler = {
+      get: function get(target, method) {
+        if (ignoreMethods.includes(method)) {
+          return target[method];
+        }
+
+        return /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee() {
+          var _target$method;
+
+          var _len,
+              args,
+              _key,
+              _args = arguments;
+
+          return runtime_1.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  for (_len = _args.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+                    args[_key] = _args[_key];
+                  }
+
+                  return _context.abrupt("return", _this.retryable((_target$method = target[method]).bind.apply(_target$method, [target].concat(args))));
+
+                case 2:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+      }
+    };
+    return new Proxy(client, handler);
+  };
+
+  _proto.retryable = /*#__PURE__*/function () {
+    var _retryable = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee2(action, retries) {
+      var _this$callbacks$get2, _this$callbacks$get, delay;
+
+      return runtime_1.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              if (retries === void 0) {
+                retries = 0;
+              }
+
+              _context2.prev = 1;
+              _context2.next = 4;
+              return action();
+
+            case 4:
+              return _context2.abrupt("return", _context2.sent);
+
+            case 7:
+              _context2.prev = 7;
+              _context2.t0 = _context2["catch"](1);
+
+              if (!(isRetryableRequest(_context2.t0) && retries < this.config.maxRetries)) {
+                _context2.next = 14;
+                break;
+              }
+
+              delay = Math.round(1500 * Math.log(++retries + 1));
+              (_this$callbacks$get = this.callbacks.get('retry')) == null ? void 0 : _this$callbacks$get.call(this, retries, delay, _context2.t0);
+              new Promise(function (resolve) {
+                return void setTimeout(resolve, delay);
+              });
+              return _context2.abrupt("return", this.retryable(action, retries));
+
+            case 14:
+              (_this$callbacks$get2 = this.callbacks.get('failure')) == null ? void 0 : _this$callbacks$get2.call(this, _context2.t0);
+              throw _context2.t0;
+
+            case 16:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, this, [[1, 7]]);
+    }));
+
+    function retryable(_x, _x2) {
+      return _retryable.apply(this, arguments);
+    }
+
+    return retryable;
+  }();
+
+  return RetryableClient;
+}();
+
 var balancePaymentDetailsSchema = /*#__PURE__*/schema.object({
   accountId: ['account_id', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.string())],
   status: ['status', /*#__PURE__*/schema.optional( /*#__PURE__*/schema.string())]
@@ -17780,6 +17923,7 @@ exports.OrdersApi = OrdersApi;
 exports.PaymentsApi = PaymentsApi;
 exports.RefundsApi = RefundsApi;
 exports.ResponseValidationError = ResponseValidationError;
+exports.RetryableClient = RetryableClient;
 exports.SDK_VERSION = SDK_VERSION;
 exports.SubscriptionsApi = SubscriptionsApi;
 exports.TeamApi = TeamApi;
@@ -18024,6 +18168,8 @@ exports.invoiceQuerySchema = invoiceQuerySchema;
 exports.invoiceRecipientSchema = invoiceRecipientSchema;
 exports.invoiceSchema = invoiceSchema;
 exports.invoiceSortSchema = invoiceSortSchema;
+exports.isApiError = isApiError;
+exports.isAxiosError = isAxiosError;
 exports.isFileWrapper = isFileWrapper;
 exports.itemVariationLocationOverridesSchema = itemVariationLocationOverridesSchema;
 exports.jobAssignmentSchema = jobAssignmentSchema;

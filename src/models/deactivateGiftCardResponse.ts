@@ -1,12 +1,15 @@
-import {lazy, object, Schema} from "../schema";
-import {GiftCardActivity, giftCardActivitySchema} from "./giftCardActivity";
+import { lazy, object, Schema } from '../schema';
+import { GiftCardActivity, giftCardActivitySchema } from './giftCardActivity';
 
 export interface DeactivateGiftCardResponse {
-    giftCardActivity: GiftCardActivity
+  giftCardActivity: GiftCardActivity;
 }
 
 export const deactivateGiftCardResponseSchema: Schema<DeactivateGiftCardResponse> = object(
-    {
-        giftCardActivity: ['gift_card_activity', lazy(() => giftCardActivitySchema)]
-    }
-)
+  {
+    giftCardActivity: [
+      'gift_card_activity',
+      lazy(() => giftCardActivitySchema),
+    ],
+  }
+);
