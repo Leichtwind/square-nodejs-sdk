@@ -1,5 +1,5 @@
 {
-  "version": "9.1.0",
+  "version": "9.1.1",
   "license": "MIT",
   "sideEffects": false,
   "main": "dist/index.js",
@@ -16,7 +16,12 @@
     "build": "tsdx build",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint src",
-    "prepare": "tsdx build"
+    "prepare": "tsdx build",
+    "prepublish": "node bin/prepublish.js --from . --to dist",
+    "version:bump": "node bin/npm-dev-version.js",
+    "publish": "npm run build && npm rum version:bump && npm run prepublish && npm publish dist",
+    "publish:dev": "npm run publish -- --tag dev",
+    "publish:dev:dry": "npm run publish -- --tag dev --dry-run"
   },
   "peerDependencies": {},
   "prettier": {
@@ -25,21 +30,26 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "square",
+  "name": "@goparrot/square",
   "description": "Use Square APIs to manage and run business including payment, customer, product, inventory, and employee management.",
   "author": "Square Developer Platform",
   "devDependencies": {
     "@types/detect-node": "^2.0.0",
+    "@types/git-branch": "^2.0.1",
     "@types/json-bigint": "^1.0.0",
     "@types/lodash.flatmap": "^4.5.6",
     "@types/luxon": "^1.26.2",
+    "@types/minimist": "^1.2.1",
     "@types/node": "^14.14.35",
+    "@types/semver": "^7.3.4",
     "@types/uuid": "^8.3.0",
     "abort-controller": "^3.0.0",
+    "fs": "0.0.1-security",
+    "git-branch": "^2.0.1",
+    "minimist": "^1.2.5",
+    "semver": "^7.3.5",
     "stream-equal": "^2.0.1",
     "tsdx": "^0.14.1",
-    "tslib": "^2.1.0",
-    "typescript": "^3.9.7",
     "uuid": "^8.3.0"
   },
   "dependencies": {
