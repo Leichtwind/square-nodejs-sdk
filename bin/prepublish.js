@@ -13,8 +13,8 @@ async function run() {
   );
 
   packageJson.main = './index.js';
+  packageJson.types = './index.d.ts';
   packageJson.module = './square.esm.js';
-  packageJson.typings = './index.d.ts';
   packageJson.sideEffects = false;
 
   fs.writeFileSync(`${to}/package.json`, JSON.stringify(packageJson, null, 4));

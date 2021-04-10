@@ -47,6 +47,7 @@ import {
 } from './queryString';
 import { prepareArgs } from './validate';
 import { xmlDeserialize, xmlSerialize } from './xmlSerialization';
+import { bigIntToNumber } from '../helper';
 
 export interface RequestBuilderFactory<BaseUrlParamType, AuthParams> {
   (httpMethod: HttpMethod, path?: string): RequestBuilder<
@@ -106,41 +107,67 @@ export interface AuthenticatorInterface<AuthParams> {
 
 export interface RequestBuilder<BaseUrlParamType, AuthParams> {
   deprecated(methodName: string, message?: string): void;
+
   prepareArgs: typeof prepareArgs;
+
   method(httpMethodName: HttpMethod): void;
+
   baseUrl(arg: BaseUrlParamType): void;
+
   authenticate(params: AuthParams): void;
+
   appendPath(path: string): void;
+
   appendTemplatePath(
     strings: TemplateStringsArray,
     ...args: Array<PathTemplateTypes>
   ): void;
+
   acceptJson(): void;
+
   accept(acceptHeaderValue: string): void;
+
   contentType(contentTypeHeaderValue: string): void;
+
   header(name: string, value?: string | boolean | number): void;
+
   headers(headersToMerge: Record<string, string>): void;
+
   query(name: string, value: QueryValue): void;
+
   query(parameters?: Record<string, QueryValue> | null): void;
+
   form(parameters: Record<string, unknown>): void;
+
   formData(parameters: Record<string, unknown>): void;
+
   text(body: string): void;
+
   json(data: unknown): void;
+
   xml<T>(
     argName: string,
     data: T,
     rootName: string,
     schema: Schema<T, any>
   ): void;
+
   stream(file?: FileWrapper): void;
+
   toRequest(): HttpRequest;
+
   intercept(
     interceptor: HttpInterceptorInterface<RequestOptions | undefined>
   ): void;
+
   interceptRequest(interceptor: (request: HttpRequest) => HttpRequest): void;
+
   interceptResponse(interceptor: (response: HttpContext) => HttpContext): void;
+
   defaultToError(apiErrorCtor: ApiErrorConstructor): void;
+
   validateResponse(validate: boolean): void;
+
   throwOn<ErrorCtorArgs extends any[]>(
     statusCode: number | [number, number],
     errorConstructor: {
@@ -148,23 +175,30 @@ export interface RequestBuilder<BaseUrlParamType, AuthParams> {
     },
     ...args: ErrorCtorArgs
   ): void;
+
   call(requestOptions?: RequestOptions): Promise<ApiResponse<void>>;
+
   callAsJson<T>(
     schema: Schema<T, any>,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<T>>;
+
   callAsStream(
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<NodeJS.ReadableStream | Blob>>;
+
   callAsText(requestOptions?: RequestOptions): Promise<ApiResponse<string>>;
+
   callAsOptionalText(
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<string | undefined>>;
+
   callAsXml<T>(
     rootName: string,
     schema: Schema<T, any>,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<T>>;
+
   callAsXml<T>(
     rootName: string,
     schema: Schema<T, any>,
@@ -206,12 +240,15 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
     this._addAuthentication();
     this.prepareArgs = prepareArgs.bind(this);
   }
+
   authenticate(params: AuthParams): void {
     this._authParams = params;
   }
+
   deprecated(methodName: string, message?: string): void {
     deprecated(methodName, message);
   }
+
   appendTemplatePath(
     strings: TemplateStringsArray,
     ...args: Array<PathTemplateTypes>
@@ -219,33 +256,42 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
     const pathSegment = pathTemplate(strings, ...args);
     this.appendPath(pathSegment);
   }
+
   method(httpMethodName: HttpMethod): void {
     this._httpMethod = httpMethodName;
   }
+
   baseUrl(arg: BaseUrlParamType): void {
     this._baseUrlArg = arg;
   }
+
   appendPath(path: string): void {
     this._path = this._path ? mergePath(this._path, path) : path;
   }
+
   acceptJson(): void {
     this._accept = JSON_CONTENT_TYPE;
   }
+
   accept(acceptHeaderValue: string): void {
     this._accept = acceptHeaderValue;
   }
+
   contentType(contentTypeHeaderValue: string): void {
     this._contentType = contentTypeHeaderValue;
   }
+
   header(name: string, value?: string | boolean | number): void {
     if (value === undefined) {
       return;
     }
     setHeader(this._headers, name, value.toString());
   }
+
   headers(headersToMerge: Record<string, string>): void {
     mergeHeaders(this._headers, headersToMerge);
   }
+
   query(name: string, value: QueryValue): void;
   query(parameters?: Record<string, QueryValue> | null): void;
   query(
@@ -263,14 +309,17 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
       this._query.push(queryString);
     }
   }
+
   text(body: string): void {
     this._body = body;
     this._setContentTypeIfNotSet(TEXT_CONTENT_TYPE);
   }
+
   json(data: unknown): void {
     this._body = JSON.stringify(data);
     this._setContentTypeIfNotSet(JSON_CONTENT_TYPE);
   }
+
   xml<T>(
     argName: string,
     data: T,
@@ -284,17 +333,21 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
     this._body = xmlSerialize(rootName, mappingResult.result);
     this._setContentTypeIfNotSet(XML_CONTENT_TYPE);
   }
+
   stream(file?: FileWrapper): void {
     this._stream = file;
   }
+
   form(parameters: Record<string, unknown>): void {
     this._form = filterFileWrapperFromKeyValuePairs(
       formDataEncodeObject(parameters)
     );
   }
+
   formData(parameters: Record<string, unknown>): void {
     this._formData = formDataEncodeObject(parameters);
   }
+
   toRequest(): HttpRequest {
     const request: HttpRequest = {
       method: this._httpMethod,
@@ -336,25 +389,31 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
 
     return request;
   }
+
   intercept(
     interceptor: HttpInterceptorInterface<RequestOptions | undefined>
   ): void {
     this._interceptors.push(interceptor);
   }
+
   interceptRequest(
     interceptor: (httpRequest: HttpRequest) => HttpRequest
   ): void {
     this.intercept((req, opt, next) => next(interceptor(req), opt));
   }
+
   interceptResponse(interceptor: (response: HttpContext) => HttpContext): void {
     this.intercept(async (req, opt, next) => interceptor(await next(req, opt)));
   }
+
   defaultToError(apiErrorCtor: ApiErrorConstructor): void {
     this._apiErrorFactory = apiErrorCtor;
   }
+
   validateResponse(validate: boolean): void {
     this._validateResponse = validate;
   }
+
   throwOn<ErrorCtorArgs extends any[]>(
     statusCode: number | [number, number],
     errorConstructor: {
@@ -376,6 +435,7 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
       return context;
     });
   }
+
   async call(requestOptions?: RequestOptions): Promise<ApiResponse<void>> {
     // Prepare the HTTP pipeline
     const pipeline = callHttpInterceptors(
@@ -394,6 +454,7 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
 
     return { ...response, request, result: undefined };
   }
+
   async callAsText(
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<string>> {
@@ -403,6 +464,7 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
     }
     return { ...result, result: result.body };
   }
+
   async callAsOptionalText(
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<string | undefined>> {
@@ -412,6 +474,7 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
     }
     return { ...result, result: result.body };
   }
+
   async callAsStream(
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<NodeJS.ReadableStream | Blob>> {
@@ -419,6 +482,7 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
     const result = await this.call(requestOptions);
     return { ...result, result: convertToStream(result.body) };
   }
+
   async callAsJson<T>(
     schema: Schema<T>,
     requestOptions?: RequestOptions
@@ -449,8 +513,9 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
     if (mappingResult.errors) {
       throw new ResponseValidationError(result, mappingResult.errors);
     }
-    return { ...result, result: mappingResult.result };
+    return { ...result, result: bigIntToNumber(mappingResult.result) };
   }
+
   async callAsXml<T>(
     rootName: string,
     schema: Schema<T, any>,
@@ -484,11 +549,13 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
     }
     return { ...result, result: mappingResult.result };
   }
+
   private _setContentTypeIfNotSet(contentType: string) {
     if (!this._contentType) {
       setHeaderIfNotSet(this._headers, CONTENT_TYPE_HEADER, contentType);
     }
   }
+
   private _addResponseValidator(): void {
     this.interceptResponse(context => {
       const { response } = context;
@@ -504,6 +571,7 @@ export class DefaultRequestBuilder<BaseUrlParamType, AuthParams>
       return context;
     });
   }
+
   private _addAuthentication() {
     this.intercept((...args) => {
       const handler = this._authenticationProvider(this._authParams);

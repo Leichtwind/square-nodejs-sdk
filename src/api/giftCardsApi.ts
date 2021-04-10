@@ -155,7 +155,7 @@ export class GiftCardsApi extends BaseApi {
     body: GiftCardActivityRequest,
     requestOptions?: RequestOptions
   ): Promise<ApiResponse<GiftCardActivityResponse>> {
-    const req = this.createRequest('POST', '/v2/gift-cards/activity');
+    const req = this.createRequest('POST', '/v2/gift-cards/activities');
     const mapped = req.prepareArgs({
       body: [body, giftCardActivityRequestSchema],
     });

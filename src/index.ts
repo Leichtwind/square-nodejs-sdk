@@ -6,6 +6,7 @@ export * from './retryableClient';
 export * from './configuration';
 export * from './defaultConfiguration';
 export * from './fileWrapper';
+export * from './helper';
 export * from './api/applePayApi';
 export * from './api/bankAccountsApi';
 export * from './api/bookingsApi';

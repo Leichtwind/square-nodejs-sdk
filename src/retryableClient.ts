@@ -19,7 +19,7 @@ type NetworkError = Error & {
   response: unknown;
   isAxiosError?: boolean;
 };
-type AcceptedError = ApiError | Error;
+export type AcceptedError = ApiError | Error;
 
 export const isApiError = (error: AcceptedError): error is ApiError => {
   return error instanceof ApiError;
