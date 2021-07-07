@@ -1,26 +1,23 @@
 import { object, optional, Schema, string } from '../schema';
 
 /**
- * Associates a loyalty account with the buyer's phone number.
- * For more information, see
+ * Represents the mapping that associates a loyalty account with a buyer.
+ * Currently, a loyalty account can only be mapped to a buyer by phone number. For more information, see
  * [Loyalty Overview](https://developer.squareup.com/docs/loyalty/overview).
  */
 export interface LoyaltyAccountMapping {
-  /** The Square-assigned ID of the mapping. */
-  id?: string;
-  /** The type of mapping. */
-  type: string;
-  /** The phone number, in E.164 format. For example, "+14155551111". */
-  value: string;
-  /** The timestamp when the mapping was created, in RFC 3339 format. */
-  createdAt?: string;
+    /** The Square-assigned ID of the mapping. */
+    id?: string;
+    /** The timestamp when the mapping was created, in RFC 3339 format. */
+    createdAt?: string;
+    /** The phone number of the buyer, in E.164 format. For example, "+14155551111". */
+    phoneNumber?: string;
 }
 
 export const loyaltyAccountMappingSchema: Schema<LoyaltyAccountMapping> = object(
-  {
-    id: ['id', optional(string())],
-    type: ['type', string()],
-    value: ['value', string()],
-    createdAt: ['created_at', optional(string())],
-  }
+    {
+        id: ['id', optional(string())],
+        createdAt: ['created_at', optional(string())],
+        phoneNumber: ['phone_number', optional(string())],
+    }
 );

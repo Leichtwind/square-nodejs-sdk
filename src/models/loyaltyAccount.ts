@@ -1,5 +1,4 @@
 import {
-  array,
   lazy,
   number,
   object,
@@ -19,12 +18,6 @@ import {
 export interface LoyaltyAccount {
   /** The Square-assigned ID of the loyalty account. */
   id?: string;
-  /**
-   * The list of mappings that the account is associated with.
-   * Currently, a buyer can only be mapped to a loyalty account using
-   * a phone number. Therefore, the list can only have one mapping.
-   */
-  mappings: LoyaltyAccountMapping[];
   /** The Square-assigned ID of the [loyalty program](#type-LoyaltyProgram) to which the account belongs. */
   programId: string;
   /**
@@ -42,11 +35,16 @@ export interface LoyaltyAccount {
   createdAt?: string;
   /** The timestamp when the loyalty account was last updated, in RFC 3339 format. */
   updatedAt?: string;
+  /**
+   * Represents the mapping that associates a loyalty account with a buyer.
+   * Currently, a loyalty account can only be mapped to a buyer by phone number. For more information, see
+   * [Loyalty Overview](https://developer.squareup.com/docs/loyalty/overview).
+   */
+  mapping?: LoyaltyAccountMapping;
 }
 
 export const loyaltyAccountSchema: Schema<LoyaltyAccount> = object({
   id: ['id', optional(string())],
-  mappings: ['mappings', array(lazy(() => loyaltyAccountMappingSchema))],
   programId: ['program_id', string()],
   balance: ['balance', optional(number())],
   lifetimePoints: ['lifetime_points', optional(number())],
@@ -54,4 +52,5 @@ export const loyaltyAccountSchema: Schema<LoyaltyAccount> = object({
   enrolledAt: ['enrolled_at', optional(string())],
   createdAt: ['created_at', optional(string())],
   updatedAt: ['updated_at', optional(string())],
+  mapping: ['mapping', optional(lazy(() => loyaltyAccountMappingSchema))],
 });
